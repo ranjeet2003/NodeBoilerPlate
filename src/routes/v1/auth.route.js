@@ -16,6 +16,12 @@ const corsOptions = {
 // custom configured cors cors
 router.post('/register', cors(corsOptions), validate(authValidation.register), authController.register);
 router.post('/login', validate(authValidation.login), authController.login);
+
+// enabling pre-flight cors request
+// router.options('/products/:id', cors()) // enable pre-flight request for DELETE request
+// router.del('/products/:id', cors(), function (req, res, next) {
+//   res.json({msg: 'This is CORS-enabled for all origins!'})
+// })
 router.post('/logout', validate(authValidation.logout), authController.logout);
 router.post('/refresh-tokens', validate(authValidation.refreshTokens), authController.refreshTokens);
 router.post('/forgot-password', validate(authValidation.forgotPassword), authController.forgotPassword);
