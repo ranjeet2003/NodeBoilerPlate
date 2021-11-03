@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const auth = require('../../middlewares/auth');
 const validate = require('../../middlewares/validate');
 const userValidation = require('../../validations/user.validation');
@@ -13,7 +14,10 @@ router
 
 router
   .route('/:userId')
-  .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
+  // default system routes
+  // .get(auth('getUsers'), validate(userValidation.getUser), userController.getUser)
+  // Enable CORS for a Single Route
+  .get(auth('getUsers'), cors(), validate(userValidation.getUser), userController.getUser)
   .patch(auth('manageUsers'), validate(userValidation.updateUser), userController.updateUser)
   .delete(auth('manageUsers'), validate(userValidation.deleteUser), userController.deleteUser);
 
